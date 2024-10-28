@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ThiThucHanh.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h1>Danh mục khách hàng</h1>
+
+<p>
+    <button class="btn btn-gradient-info btn-fw" onclick="RedirectToAddNew()">
+        Create New
+    </button>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr id="customer-@item.Id" class="table-light">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <a asp-controller="Customer" asp-action="UpdateCustomer" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="Customer" asp-action="DeleteCustomer" asp-route-customerId ="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function RedirectToAddNew() 
+    {
+        window.location.href = '@Url.Action("AddNewCustomer", "Customer")';
+    }
+</script>
+<script>
+    function deleteCustomer(customerId) {
+     $.ajax({
+            url: '@Url.Action("DeleteCustomer", "Customer")',
+            type: 'GET',
+            dataType: 'json'
+            success: function(response) {
+                if (response.success) {
+                    $('#customer-' + customerId).remove();
+                    alert(response.message);
+                } else {
+                    alert('Error deleting customer: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('An error occurred: ' + error);
+            }
+        });
+</script>
