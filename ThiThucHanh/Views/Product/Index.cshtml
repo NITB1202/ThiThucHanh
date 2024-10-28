@@ -1,11 +1,11 @@
-﻿@model IEnumerable<ThiThucHanh.Models.Customer>
+﻿@model IEnumerable<ThiThucHanh.Models.Product>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 
-<h1>Danh mục khách hàng</h1>
+<h1>Danh mục sản phẩm</h1>
 
 <p>
     <button class="btn btn-gradient-info btn-fw" onclick="RedirectToAddNew()">
@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                @Html.DisplayNameFor(model => model.Cost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.ImageLink)
             </th>
             <th></th>
         </tr>
@@ -34,23 +34,21 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Phone)
+                @Html.DisplayFor(modelItem => item.Cost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
+                @Html.DisplayFor(modelItem => item.ImageLink)
             </td>
             <td>
-                <a asp-controller="Customer" asp-action="UpdateCustomer" asp-route-id="@item.Id">Edit</a> |
-                <a asp-controller="Customer" asp-action="DeleteCustomer" asp-route-customerId ="@item.Id">Delete</a>
+                <a asp-controller="Product" asp-action="UpdateProduct" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="Product" asp-action="DeleteProduct" asp-route-productId="@item.Id">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-
 <script>
-    function RedirectToAddNew() 
-    {
-        window.location.href = '@Url.Action("AddNewCustomer", "Customer")';
+    function RedirectToAddNew() {
+        window.location.href = '@Url.Action("AddNewProduct", "Product")';
     }
 </script>

@@ -22,6 +22,8 @@ public partial class TestThContext : DbContext
     public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>(entity =>
@@ -100,7 +102,31 @@ public partial class TestThContext : DbContext
                 .HasMaxLength(40)
                 .IsFixedLength()
                 .HasColumnName("name");
+            entity.Property(e => e.ImageLink)
+                .HasMaxLength(100)
+                .HasColumnName("image_link");
         });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.ToTable("User");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id");
+
+            entity.Property(e => e.Username)
+                .HasMaxLength(100)
+                .HasColumnName("username");
+
+            entity.Property(e => e.Password)
+                .HasMaxLength(100)
+                .HasColumnName("password");
+
+            entity.Property(e => e.Role)
+                .HasColumnName("role");
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

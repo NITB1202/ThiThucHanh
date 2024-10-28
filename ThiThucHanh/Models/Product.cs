@@ -10,6 +10,7 @@ public partial class Product
     public string Name { get; set; } = null!;
 
     public int Cost { get; set; }
+    public string? ImageLink { get; set; }
 
     public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; } = new List<InvoiceDetail>();
 }
