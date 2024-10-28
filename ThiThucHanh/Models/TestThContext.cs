@@ -105,6 +105,9 @@ public partial class TestThContext : DbContext
             entity.Property(e => e.ImageLink)
                 .HasMaxLength(100)
                 .HasColumnName("image_link");
+            entity.Property(e => e.Description)
+                .HasMaxLength(200)
+                .HasColumnName("description");
         });
 
         modelBuilder.Entity<User>(entity =>

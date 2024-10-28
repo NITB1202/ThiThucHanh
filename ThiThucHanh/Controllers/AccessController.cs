@@ -20,7 +20,7 @@ namespace ThucHanhWebMVC.Controllers
                 return View();
             }
             else
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "client");
         }
 
         [HttpPost]
@@ -32,10 +32,27 @@ namespace ThucHanhWebMVC.Controllers
                 if (u != null)
                 {
                     HttpContext.Session.SetString("Username", u.Username);
-                    return RedirectToAction("Index", "Home");
+                    if (u.Role == 1)
+                        return RedirectToAction("Index", "Home");
+                    else
+                        return RedirectToAction("Index", "Client");
                 }
             }
             return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(User user)
+        {
+            db.Users.Add(user);
+            db.SaveChanges();
+            HttpContext.Session.SetString("Username", user.Username);
+            return RedirectToAction("Index", "Client");
         }
 
         public IActionResult Logout()

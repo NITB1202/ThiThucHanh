@@ -11,6 +11,7 @@ public partial class Product
 
     public int Cost { get; set; }
     public string? ImageLink { get; set; }
+    public string? Description { get; set; }
 
     public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; } = new List<InvoiceDetail>();
 }
