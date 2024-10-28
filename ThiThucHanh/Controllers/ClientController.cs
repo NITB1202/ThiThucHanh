@@ -1,12 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ThiThucHanh.Models;
 
 namespace ThiThucHanh.Controllers
 {
     public class ClientController : Controller
     {
+        private readonly TestThContext db;
+
+        public ClientController(TestThContext db)
+        {
+            this.db = db;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var spList = db.Products.ToList();
+            return View(spList);
         }
     }
 }

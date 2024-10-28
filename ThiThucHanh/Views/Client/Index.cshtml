@@ -3,6 +3,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutOgani.cshtml";
 }
-
-<h1>Index</h1>
+@model IEnumerable<Product>
+@foreach (var item in Model)
+{
+    @await Html.PartialAsync("PartialProduct", item)
+}
 
