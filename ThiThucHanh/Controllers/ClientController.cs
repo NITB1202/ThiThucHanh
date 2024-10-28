@@ -17,5 +17,11 @@ namespace ThiThucHanh.Controllers
             var spList = db.Products.ToList();
             return View(spList);
         }
+
+        public IActionResult ViewDetails(int id)
+        {
+            var product = db.Products.Find(id);
+            return View(product);
+        }
     }
 }
